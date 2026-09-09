@@ -1,14 +1,8 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import Image from "next/image";
-import Link from "next/link";
 import { useMemo, useState } from "react";
-import dealsBg from "@/assets/images/hot-deals-bg.png";
-import { ArrowRightIcon } from "@/components/icons/ArrowRightIcon";
-import { CoffeeBeansIcon } from "@/components/icons/CoffeeBeansIcon";
 import { DealCard } from "@/features/home/components/DealCard";
-import { hotDeals } from "@/features/home/data/deals";
 import type { Locale } from "@/i18n/config";
 import { mapApiProductToShop } from "@/store/mappers/product";
 import { useGetProductsQuery } from "@/store/slices";
@@ -41,52 +35,19 @@ export function HotDeals() {
   );
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#a5a196] text-white">
-      <Image
-        src={dealsBg}
-        alt=""
-        fill
-        sizes="100vw"
-        className="object-cover object-center"
-        aria-hidden
-      />
-      <div className="absolute inset-0 bg-[#a5a196]/55" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#a5a196]/70 via-[#a5a196]/35 to-[#a5a196]/75" />
-
-      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 py-12 sm:px-6 sm:py-14 md:px-8 md:py-16 lg:px-10 lg:py-18">
-        <div className="mx-auto mb-8 max-w-2xl text-center sm:mb-10 md:mb-12">
-          <p className="font-serif text-[36px] leading-tight font-medium text-white">
-            {t("eyebrow")}
-          </p>
-          <h2 className="mt-3 font-serif text-3xl leading-tight font-medium text-white sm:text-4xl md:text-[2.75rem]">
-            {t("title")}
-          </h2>
-          <div className="mt-3 flex justify-center text-[#C9A962]">
-            <CoffeeBeansIcon className="size-7 sm:size-8" />
-          </div>
-          <p className="mt-3 text-sm text-white/80 sm:text-base">
-            {t("description")}
-          </p>
-          <Link
-            href={hotDeals.href}
-            className="mt-6 inline-flex items-center gap-2 rounded-md bg-[#C9A962] px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#D9BC82] sm:mt-7 sm:px-7 sm:py-3 sm:text-base"
-          >
-            {t("cta")}
-            <ArrowRightIcon className="size-4 rtl:rotate-180" />
-          </Link>
-        </div>
-
+    <section className="bg-[#f5f0e8] px-2 py-8 sm:px-3 sm:py-9 md:px-4 md:py-10">
+      <div className="mx-auto w-full max-w-[1600px]">
         {isLoading ? (
-          <p className="py-8 text-center text-sm text-white/70">
+          <p className="py-5 text-center text-sm text-[#7a6b5d]">
             {tCommon("loading")}
           </p>
         ) : dealProducts.length === 0 ? (
-          <p className="py-8 text-center text-sm text-white/70">
+          <p className="py-5 text-center text-sm text-[#7a6b5d]">
             {t("empty")}
           </p>
         ) : (
           <>
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 md:gap-5">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
               {visibleProducts.map((product) => (
                 <DealCard
                   key={product.id}
@@ -97,7 +58,7 @@ export function HotDeals() {
             </div>
 
             {pageCount > 1 ? (
-              <div className="mt-8 flex items-center justify-center gap-2.5">
+              <div className="mt-5 flex items-center justify-center gap-2">
                 {Array.from({ length: pageCount }).map((_, i) => (
                   <button
                     key={i}
@@ -105,10 +66,10 @@ export function HotDeals() {
                     onClick={() => setPage(i)}
                     aria-label={`${i + 1}`}
                     aria-current={i === currentPage}
-                    className={`h-2 rounded-full transition-all ${
+                    className={`h-1.5 rounded-full transition-all ${
                       i === currentPage
-                        ? "w-7 bg-white"
-                        : "w-2 bg-white/35 hover:bg-white/55"
+                        ? "w-5 bg-[#C9A962]"
+                        : "w-1.5 bg-[#a5a196]/30 hover:bg-[#a5a196]/50"
                     }`}
                   />
                 ))}

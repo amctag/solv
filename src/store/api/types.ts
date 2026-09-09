@@ -106,6 +106,7 @@ export type ApiHeroSlide = {
   imageAltAr: string | null;
   imagePath: string;
   href: string;
+  categoryId: string | null;
   sortOrder: number;
 };
 
@@ -202,12 +203,47 @@ export type CreateSlideInput = {
   imageAlt: string;
   imageAltAr?: string | null;
   imagePath: string;
-  href: string;
+  href?: string;
+  categoryId: string;
   sortOrder?: number;
   isActive?: boolean;
 };
 
 export type UpdateSlideInput = Partial<Omit<CreateSlideInput, "id">>;
+
+export type ApiPromoBanner = {
+  id: string;
+  imageAlt: string;
+  imageAltAr: string | null;
+  imagePath: string;
+  href: string;
+  categoryId: string | null;
+  sortOrder: number;
+};
+
+export type ApiAdminPromoBanner = ApiPromoBanner & {
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type AdminPromoBannerListParams = PaginationParams & {
+  search?: string;
+  isActive?: boolean;
+};
+
+export type CreatePromoBannerInput = {
+  id?: string;
+  imageAlt: string;
+  imageAltAr?: string | null;
+  imagePath: string;
+  href?: string;
+  categoryId: string;
+  sortOrder?: number;
+  isActive?: boolean;
+};
+
+export type UpdatePromoBannerInput = Partial<Omit<CreatePromoBannerInput, "id">>;
 
 export type OrderStatus =
   | "PENDING"
